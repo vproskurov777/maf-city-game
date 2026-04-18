@@ -274,28 +274,48 @@ function renderSelectedTerritoryInfo(selectedTerritoryId) {
     `;
   }
 
-return `
-  <div class="info-panel">
-    <h3>${territory.name}</h3>
-    <p><strong>ID:</strong> ${territory.id}</p>
-    <p><strong>Тип:</strong> ${getTerritoryTypeLabel(territory.type)}</p>
-    <p><strong>Власник:</strong> ${getOwnerName(territory.ownerId)}</p>
-    <p><strong>Захист:</strong> ${territory.isDefended ? "Установлено" : "Немає"}</p>
-    <p><strong>Сусіди:</strong> ${getNeighborNames(territory)}</p>
-    <p><strong>Координати:</strong> X=${territory.x}%, Y=${territory.y}%</p>
-  </div>
-`;
+  return `
+    <div class="info-panel">
+      <h3>${territory.name}</h3>
+      <p><strong>Тип:</strong> ${getTerritoryTypeLabel(territory.type)}</p>
+      <p><strong>Власник:</strong> ${getOwnerName(territory.ownerId)}</p>
+      <p><strong>Захист:</strong> ${territory.isDefended ? "Установлено" : "Немає"}</p>
+    </div>
+  `;
 }
 
 function renderAttackPanel() {
   const fromTerritory = getTerritoryById(state.attackFromTerritoryId);
   const targetTerritory = getTerritoryById(state.attackTargetTerritoryId);
 
+  const attacksListHtml = state.attacksThisTurn.length
+    ? `
+      <div style="margin-top: 14px;">
+        <p><strong>Атаки за цей хід:</strong></p>
+        <ul style="margin: 8px 0 0 18px; padding: 0;">
+          ${state.attacksThisTurn.map(attack => {
+            const from = getTerritoryById(attack.fromId);
+            const target = getTerritoryById(attack.targetId);
+
+            return `<li>${from?.name || attack.fromId} → ${target?.name || attack.targetId}</li>`;
+          }).join("")}
+        </ul>
+      </div>
+    `
+    : `<p style="margin-top: 14px;"><strong>Атаки за цей хід:</strong> ще немає</p>`;
+
   if (!state.attackMode) {
     return `
       <div class="attack-panel">
         <h3>Атака</h3>
-        <p>Вибери свою територію і натисни "Режим атаки".</p>
+        <p>Вибери свою територію і натисни кнопку.</p>
+
+        <div class="controls" style="justify-content: flex-start; margin-bottom: 0; margin-top: 12px;">
+          <button class="control-button" id="startAttackButton">Атакувати</button>
+          <button class="control-button secondary" id="cancelAttackButton">Скасувати атаку</button>
+        </div>
+
+        ${attacksListHtml}
       </div>
     `;
   }
@@ -305,6 +325,12 @@ function renderAttackPanel() {
       <div class="attack-panel">
         <h3>Атака</h3>
         <p>Оберіть територію, з якої буде атака.</p>
+
+        <div class="controls" style="justify-content: flex-start; margin-bottom: 0; margin-top: 12px;">
+          <button class="control-button secondary" id="cancelAttackButton">Скасувати атаку</button>
+        </div>
+
+        ${attacksListHtml}
       </div>
     `;
   }
@@ -315,6 +341,12 @@ function renderAttackPanel() {
         <h3>Атака</h3>
         <p><strong>Звідки:</strong> ${fromTerritory.name}</p>
         <p>Тепер вибери сусідню ціль.</p>
+
+        <div class="controls" style="justify-content: flex-start; margin-bottom: 0; margin-top: 12px;">
+          <button class="control-button secondary" id="cancelAttackButton">Скасувати атаку</button>
+        </div>
+
+        ${attacksListHtml}
       </div>
     `;
   }
@@ -325,7 +357,13 @@ function renderAttackPanel() {
       <p><strong>Звідки:</strong> ${fromTerritory.name}</p>
       <p><strong>Куди:</strong> ${targetTerritory.name}</p>
       <p><strong>Статус:</strong> атака дозволена</p>
-      <p>На наступному кроці тут підключимо покерні комбінації.</p>
+
+      <div class="controls" style="justify-content: flex-start; margin-bottom: 0; margin-top: 12px;">
+        <button class="control-button" id="confirmAttackButton">Підтвердити атаку</button>
+        <button class="control-button secondary" id="cancelAttackButton">Скасувати атаку</button>
+      </div>
+
+      ${attacksListHtml}
     </div>
   `;
 }
@@ -486,9 +524,10 @@ function attachControlEvents() {
   if (cancelAttackButton) {
     cancelAttackButton.addEventListener("click", () => {
       resetAttackState();
+      state.selectedTerritoryId = null;
       renderGame();
     });
-  }
+}
 
   if (setDefenseButton) {
     setDefenseButton.addEventListener("click", () => {
