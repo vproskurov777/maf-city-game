@@ -19,7 +19,8 @@ const state = {
   selectedTerritoryId: null,
   attackMode: false,
   attackFromTerritoryId: null,
-  attackTargetTerritoryId: null
+  attackTargetTerritoryId: null,
+  attacksThisTurn: []
 };
 
 function createDeck() {
@@ -287,8 +288,9 @@ function renderSelectedTerritoryInfo(selectedTerritoryId) {
 function renderAttackPanel() {
   const fromTerritory = getTerritoryById(state.attackFromTerritoryId);
   const targetTerritory = getTerritoryById(state.attackTargetTerritoryId);
+  const attacksThisTurn = state.attacksThisTurn || [];
 
-  const attacksListHtml = state.attacksThisTurn.length
+  const attacksListHtml = attacksThisTurn.length
     ? `
       <div style="margin-top: 14px;">
         <p><strong>Атаки за цей хід:</strong></p>
