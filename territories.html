@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Території</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">🎮 Гра</a>
+  <a href="territories.html">🗺 Території</a>
+  <a href="teams.html">👥 Команди</a>
+</div>
+
+<div id="app"></div>
+
+<script src="map.js"></script>
+<script src="game.js"></script>
+
+<script>
+function renderTerritoriesPage() {
+  const app = document.getElementById("app");
+
+  app.innerHTML = `
+    <h2>Території</h2>
+    ${renderTerritoriesList(state.territories)}
+  `;
+}
+
+function initPage() {
+  state.deck = shuffleArray(createDeck());
+  state.teams = createTeams();
+  state.territories = createTerritoriesFromMap();
+
+  assignStartingTerritories(state.teams, state.territories);
+
+  renderTerritoriesPage();
+}
+
+initPage();
+</script>
+
+</body>
+</html>
