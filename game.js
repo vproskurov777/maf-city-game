@@ -386,13 +386,8 @@ function renderGame() {
 
   app.innerHTML = `
     <div class="section">
-      <h2>Команди</h2>
-      ${renderTeams(state.teams)}
-    </div>
+      <h2>Карта</h2>
 
-    <div class="section">
-      <h2>Реальна карта</h2>
-      ${renderControls()}
       <div class="map-layout">
         <div>
           ${renderMap(state.territories, state.selectedTerritoryId)}
