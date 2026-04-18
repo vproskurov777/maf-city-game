@@ -8,7 +8,8 @@
 <body>
 
 <div class="nav">
-  <a href="index.html">🎮 Гра</a>
+  <a href="index.html">🏠 Головна</a>
+  <a href="map.html">🎮 Гра</a>
   <a href="territories.html">🗺 Території</a>
   <a href="teams.html">👥 Команди</a>
 </div>
@@ -19,15 +20,6 @@
 <script src="game.js"></script>
 
 <script>
-function renderTerritoriesPage() {
-  const app = document.getElementById("app");
-
-  app.innerHTML = `
-    <h2>Території</h2>
-    ${renderTerritoriesList(state.territories)}
-  `;
-}
-
 function initPage() {
   state.deck = shuffleArray(createDeck());
   state.teams = createTeams();
@@ -35,7 +27,13 @@ function initPage() {
 
   assignStartingTerritories(state.teams, state.territories);
 
-  renderTerritoriesPage();
+  const app = document.getElementById("app");
+  app.innerHTML = `
+    <div class="section">
+      <h2>Території</h2>
+      ${renderTerritoriesList(state.territories)}
+    </div>
+  `;
 }
 
 initPage();

@@ -408,11 +408,6 @@ function renderGame() {
         </div>
       </div>
     </div>
-
-    <div class="section">
-      <h2>Території</h2>
-      ${renderTerritoriesList(state.territories)}
-    </div>
   `;
 
   attachTerritoryEvents();
