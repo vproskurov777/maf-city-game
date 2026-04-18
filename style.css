@@ -289,3 +289,63 @@ h1, h2, h3 {
 .territory-label.defended {
   box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.95);
 }
+
+.nav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.nav a {
+  text-decoration: none;
+  background: #1f2937;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  background: #374151;
+}
+
+.menu-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #111827, #020617);
+}
+
+.game-title {
+  font-size: 56px;
+  margin-bottom: 40px;
+  color: #ef4444;
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-button {
+  text-decoration: none;
+  background: #1f2937;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1px solid #374151;
+  font-size: 18px;
+  transition: 0.2s;
+  text-align: center;
+}
+
+.menu-button:hover {
+  background: #374151;
+  transform: scale(1.05);
+}
