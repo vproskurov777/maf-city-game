@@ -270,22 +270,6 @@ h1, h2, h3 {
   margin: 8px 0;
 }
 
-.control-button.success {
-  background: #16a34a;
-}
-
-.control-button.success:hover {
-  background: #15803d;
-}
-
-.control-button.danger {
-  background: #dc2626;
-}
-
-.control-button.danger:hover {
-  background: #b91c1c;
-}
-
 .territory-label.defended {
   box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.95);
 }
@@ -348,4 +332,110 @@ h1, h2, h3 {
 .menu-button:hover {
   background: #374151;
   transform: scale(1.05);
+}
+
+.territory-action-menu {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.territory-context-menu {
+  position: absolute;
+  background: rgba(17, 24, 39, 0.96);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  z-index: 50;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.territory-context-menu .control-button {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.control-button.attack {
+  background: #dc2626;
+}
+
+.control-button.attack:hover {
+  background: #b91c1c;
+}
+
+.control-button.defense {
+  background: #16a34a;
+}
+
+.control-button.defense:hover {
+  background: #15803d;
+}
+
+.control-button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+/* 🔵 ПІДТВЕРДИТИ */
+.control-button.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.control-button.primary:hover {
+  background: #1d4ed8;
+}
+
+/* ⚪ СКАСУВАТИ */
+.control-button.secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.control-button.secondary:hover {
+  background: #4b5563;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.card {
+  width: 42px;
+  height: 58px;
+  background: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid transparent;
+  user-select: none;
+}
+
+.card.selected {
+  border: 2px solid #2563eb;
+  transform: translateY(-4px);
+}
+
+.card.♦,
+.card.♥ {
+  color: red;
+}
+
+.card.♠,
+.card.♣ {
+  color: black;
 }

@@ -12,7 +12,7 @@ const GAME_MAP = [
     name: "Вест-Сайд",
     type: TERRITORY_TYPES.START,
     ownerId: null,
-    neighbors: [2, 8, 9, 10],
+    neighbors: [2, 8, 9],
     x: 21.2,
     y: 23.9
   },
@@ -93,7 +93,7 @@ const GAME_MAP = [
     name: "Грейрок",
     type: TERRITORY_TYPES.RESOURCE,
     ownerId: null,
-    neighbors: [1, 8, 9, 11, 13, 14],
+    neighbors: [9, 11, 13, 14],
     x: 37.9,
     y: 16.1
   },
@@ -174,7 +174,7 @@ const GAME_MAP = [
     name: "Саузгейт",
     type: TERRITORY_TYPES.START,
     ownerId: null,
-    neighbors: [16, 17, 18, 20],
+    neighbors: [16, 18, 20],
     x: 42.8,
     y: 81.7
   },
